@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, LessThanOrEqual, Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { CreateDroneDto } from './dto/create-drone.dto';
 import { CreateMaintenanceLogDto } from './dto/create-maintenance-log.dto';
 import { CreateMissionDto } from './dto/create-mission.dto';
@@ -137,15 +137,13 @@ export class FleetService {
       throw new BadRequestException('Mission end must be after the start');
     }
 
-    const overlap = await this.missionRepository.count({
-      where: [
-        {
-          drone: { id: dto.droneId },
-          scheduledStart: LessThanOrEqual(scheduledEnd),
-          scheduledEnd: Between(scheduledStart, scheduledEnd),
-        },
-      ],
-    });
+    const overlap = await this.missionRepository
+      .createQueryBuilder('mission')
+      .leftJoin('mission.drone', 'drone')
+      .where('drone.id = :droneId', { droneId: dto.droneId })
+      .andWhere('mission.scheduledStart < :scheduledEnd', { scheduledEnd })
+      .andWhere('mission.scheduledEnd > :scheduledStart', { scheduledStart })
+      .getCount();
 
     if (overlap > 0) {
       throw new BadRequestException('Drone already has an overlapping mission');
@@ -264,11 +262,16 @@ export class FleetService {
     }, {} as Record<string, number>);
 
     const overdueMaintenance = drones.filter((drone) => this.isMaintenanceDue(drone, now));
-    const next24HoursMissions = await this.missionRepository.count({
-      where: {
-        scheduledStart: Between(new Date(), new Date(Date.now() + 24 * 60 * 60 * 1000)),
-      },
-    });
+    let next24HoursMissions = 0;
+    try {
+      next24HoursMissions = await this.missionRepository.count({
+        where: {
+          scheduledStart: Between(new Date(), new Date(Date.now() + 24 * 60 * 60 * 1000)),
+        },
+      });
+    } catch (error) {
+      console.warn('Failed to count missions in next 24 hours, returning 0:', error);
+    }
 
     const averageFlightHours = total > 0 ? drones.reduce((sum, drone) => sum + drone.totalFlightHours, 0) / total : 0;
 

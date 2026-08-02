@@ -47,14 +47,6 @@ type MaintenanceLog = {
   drone?: Drone;
 };
 
-type FleetHealth = {
-  totalDrones: number;
-  breakdownByStatus: Record<string, number>;
-  overdueMaintenance: Drone[];
-  missionsInNext24Hours: number;
-  averageFlightHoursPerDrone: number;
-};
-
 function App() {
   return (
     <Routes>

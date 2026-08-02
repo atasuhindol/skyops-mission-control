@@ -4,12 +4,23 @@ import type { FleetHealth, Drone } from './types';
 
 export function FleetOverview() {
   const [health, setHealth] = useState<FleetHealth | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchFleetHealth()
-      .then((data) => setHealth(data))
-      .catch((err) => console.error('Failed to fetch fleet health:', err));
+      .then((data) => {
+        setHealth(data);
+        setError(null);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch fleet health:', err);
+        setError('Fleet data could not be loaded. Please check backend connection.');
+      });
   }, []);
+
+  if (error) {
+    return <div style={{ padding: '20px', color: '#b91c1c' }}>{error}</div>;
+  }
 
   if (!health) {
     return <div style={{ padding: '20px' }}>Loading fleet data...</div>;

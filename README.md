@@ -3,7 +3,7 @@
 SkyOps Mission Control is a self-contained local MVP for managing a drone fleet, missions, and maintenance activities.
 
 ## What is included
-- NestJS backend with TypeORM and SQLite persistence
+- NestJS backend with TypeORM and PostgreSQL persistence
 - React/Vite frontend with dashboard, drone registry, mission management, and maintenance logs
 - Database migrations and a seed script to populate realistic sample data
 - Backend unit tests covering core validation logic
@@ -63,5 +63,5 @@ npm test
 ```
 
 ## Notes
-- The SQLite database lives in `backend/data/skyops.sqlite`.
-- The app is designed to run full-stack from this project folder without external services.
+- PostgreSQL runs via `docker-compose.yml` with database name `skyops_mission_control`.
+- The app is designed to run full-stack from this project folder.

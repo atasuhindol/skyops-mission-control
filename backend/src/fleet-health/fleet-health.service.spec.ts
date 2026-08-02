@@ -11,8 +11,12 @@ describe('FleetHealthService', () => {
 
   beforeAll(async () => {
     dataSource = new DataSource({
-      type: 'better-sqlite3',
-      database: ':memory:',
+      type: 'postgres',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432', 10),
+      username: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD || 'password',
+      database: process.env.DB_NAME || 'skyops_mission_control',
       entities: [Drone, Mission, MaintenanceLog],
       synchronize: true,
       dropSchema: true,
