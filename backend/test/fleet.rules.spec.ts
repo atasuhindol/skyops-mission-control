@@ -255,7 +255,7 @@ describe('FleetService Business Rules', () => {
   });
 
   describe('Mission State Transitions (Strict State Machine)', () => {
-    const baseChain = [
+    const baseChain: Array<[MissionStatus, MissionStatus, boolean]> = [
       [MissionStatus.PLANNED, MissionStatus.PRE_FLIGHT_CHECK, true],
       [MissionStatus.PLANNED, MissionStatus.ABORTED, true],
       [MissionStatus.PLANNED, MissionStatus.IN_PROGRESS, false],

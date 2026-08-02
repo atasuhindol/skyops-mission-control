@@ -85,7 +85,7 @@ describe('Mission Lifecycle Integration Test', () => {
       expect(missionData.id).toBeDefined();
       expect(missionData.status).toBe(MissionStatus.PLANNED);
       expect(missionData.name).toBe('Integration Test Mission');
-      expect(missionData.drone.id).toBe(droneData.id);
+      expect(missionData.drone?.id).toBe(droneData.id);
 
       // Step 3: Verify drone is still AVAILABLE before mission progress
       let drone = await fleetService.getDrone(droneData.id);
