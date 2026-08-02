@@ -41,7 +41,7 @@ export class Drone {
   @Column({ type: 'date', nullable: true })
   nextMaintenanceDueDate: string | null;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   registrationTimestamp: Date;
 
   @OneToMany(() => Mission, (mission) => mission.drone, { cascade: true })

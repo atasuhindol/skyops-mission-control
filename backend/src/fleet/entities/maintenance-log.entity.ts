@@ -25,12 +25,12 @@ export class MaintenanceLog {
   @Column({ type: 'text', nullable: true })
   notes: string | null;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   datePerformed: Date;
 
   @Column({ type: 'int' })
   flightHoursAtMaintenance: number;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }

@@ -32,16 +32,16 @@ export class Mission {
   @Column({ type: 'varchar', default: MissionStatus.PLANNED })
   status: MissionStatus;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   scheduledStart: Date;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   scheduledEnd: Date;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   actualStart: Date | null;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   actualEnd: Date | null;
 
   @Column({ type: 'int', default: 0 })
@@ -50,7 +50,7 @@ export class Mission {
   @Column({ type: 'varchar', nullable: true })
   abortReason: string | null;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
   @ManyToOne(() => Drone, (drone) => drone.missions, { onDelete: 'SET NULL', nullable: true })

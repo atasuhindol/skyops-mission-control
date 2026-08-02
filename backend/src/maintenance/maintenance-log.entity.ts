@@ -19,7 +19,7 @@ export class MaintenanceLog {
   @Column({ type: 'varchar', nullable: true })
   notes: string | null;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   datePerformed: Date;
 
   @Column({ type: 'int' })

@@ -23,13 +23,13 @@ export class Drone {
   @Column({ type: 'int', default: 0 })
   totalFlightHours: number;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   lastMaintenanceDate: Date | null;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   nextMaintenanceDueDate: Date | null;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   registrationTimestamp: Date;
 
   @Column({ type: 'int', default: 0 })

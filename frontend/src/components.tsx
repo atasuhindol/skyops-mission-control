@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { fetchFleetHealth, fetchDrones } from '../api';
-import { FleetHealth, Drone } from '../types';
+import { fetchFleetHealth, fetchDrones } from './api';
+import type { FleetHealth, Drone } from './types';
 
 export function FleetOverview() {
   const [health, setHealth] = useState<FleetHealth | null>(null);

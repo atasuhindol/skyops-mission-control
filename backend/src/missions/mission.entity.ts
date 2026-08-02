@@ -22,16 +22,16 @@ export class Mission {
   @Column()
   siteLocation: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   plannedStart: Date;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   plannedEnd: Date;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   actualStart: Date | null;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   actualEnd: Date | null;
 
   @Column({ type: 'float', nullable: true })
