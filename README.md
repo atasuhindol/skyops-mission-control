@@ -10,40 +10,6 @@ SkyOps Mission Control is a self-contained local MVP for managing a drone fleet,
 
 ## Run locally
 
-### 1. Install dependencies
-```bash
-cd backend
-npm install
-cd ../frontend
-npm install
-```
-
-### 2. Create local database and seed data
-```bash
-cd ../backend
-npm run seed
-```
-
-### 3. Start the backend
-```bash
-cd backend
-npm run start:dev
-```
-
-### 4. Start the frontend
-```bash
-cd frontend
-npm run dev
-```
-
-The frontend expects the backend at http://localhost:3000/api and will run on http://localhost:5173.
-
-## Test
-```bash
-cd backend
-npm test
-```
-
 ## 🚀 Tech Stack
 *   **Backend:** NestJS (TypeScript), TypeORM
 *   **Database:** PostgreSQL
@@ -60,6 +26,41 @@ npm test
 From the root directory, spin up the PostgreSQL instance:
 ```bash
 docker-compose up -d
+```
+
+### 2. Install dependencies
+```bash
+cd backend
+npm install
+cd ../frontend
+npm install
+```
+
+### 3. Create local database and seed data
+```bash
+cd ../backend
+npm run seed
+```
+
+### 4. Start the backend
+```bash
+cd backend
+npm run start:dev
+```
+
+### 5. Start the frontend
+```bash
+cd frontend
+npm run dev
+```
+
+The frontend expects the backend at http://localhost:3000/api and will run on http://localhost:5173.
+
+## Test
+```bash
+cd backend
+npm test
+```
 
 ## Notes
 - The SQLite database lives in `backend/data/skyops.sqlite`.
